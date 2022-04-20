@@ -1,0 +1,30 @@
+.header {
+    background-color: #0d478c;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 100%;
+    width: auto;
+    height:70px;
+    
+}
+.header > div{
+    padding: 15px 15px;
+}
+img {
+    height: 30px;
+}
+.header-left{
+    flex: 1;
+}
+.header-center{
+    display:flex;
+    flex: 2;
+    display:flex;
+    justify-content: center;
+}
+.header-right{
+    flex: 1;
+    display:flex;
+    justify-content: space-between;
+}
