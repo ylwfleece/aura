@@ -19,6 +19,10 @@ const ErrorText = (props) => {
       </p>
     );
   }
-  return <p class="error-message__detail">{mainContent}</p>;
+  return (
+    <p class="error-message__detail">
+      {`Your account has been locked because of consecutive failed login attempts. Please try again in 1 minute`}
+    </p>
+  );
 };
 export default ErrorText;
