@@ -18,7 +18,6 @@ export default function Text({ value='', onChange, ...rest }) {
     return(
         <TextField 
             value={inputValue}
-            className="Please"
             onChange={handleChange}
             {...rest}
             
