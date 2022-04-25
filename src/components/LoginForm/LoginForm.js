@@ -9,6 +9,10 @@ import { Button } from "@mui/material";
 const LoginForm = (props) => {
   return (
     <div className="jumbo-card">
+      <div className="jumbo-card-top">
+        <img src='../../assets/images/pdf_icon.png' className="aura-logo-img" />
+        <div className="aura-logo-txt">Aura</div>
+      </div>
       <div className="login-form-container">
         <section className="login-standard">
           <Input placeholder="Email Address" type="email" />

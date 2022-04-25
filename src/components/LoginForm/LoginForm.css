@@ -1,13 +1,31 @@
 .jumbo-card {
-    background-color: darkgray;
+    background-color: rgb(1, 1, 87);
     border-radius: 14px;
     display: flex;
     flex-direction: column;
     padding: auto;
-    height: 400px;
+    height: 420px;
     width: 26%;
     margin-left: 37%;
     margin-top: 180px;
+}
+
+.jumbo-card-top {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+}
+
+.aura-logo-img {
+    width: 25px;
+    margin-left: 25%;
+    /* background-image: url('../../assets/images/fav-icon.png'); */
+}
+
+.aura-logo-txt {
+    width: 25%;
+    margin-right: 25%;
+    color: white;
 }
 
 .login-form-container {
