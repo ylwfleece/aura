@@ -1,6 +1,6 @@
 import ErrorIcon from "./ErrorIcon.js";
 import ErrorText from "./ErrorText.js";
-const ErrorText = (props) => {
+const Error = (props) => {
   return (
     <div class="error-message">
       <ErrorIcon></ErrorIcon>
@@ -12,4 +12,4 @@ const ErrorText = (props) => {
     </div>
   );
 };
-export default ErrorText;
+export default Error;

@@ -1,12 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-import AuraButton from './components/Button/AuraButton';
+
+import LoginForm from './components/LoginForm/LoginForm';
 
 function App() {
   return (
     <div className='App'>
-      <AuraButton variant='contained'> A button</AuraButton>
-      <AuraButton variant='outlined'> Outlined </AuraButton>
+      <LoginForm />
     </div>
   );
 }
