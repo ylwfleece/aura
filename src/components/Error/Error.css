@@ -1,0 +1,16 @@
+.error-message__container {
+  width: 40rem;
+  height: 6rem;
+  font-size: 1.4rem;
+  color: red;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+.errIcon {
+  fill: red;
+  height: 1.6rem;
+}
+.error-message__detail {
+  text-align: left;
+}

@@ -1,10 +1,12 @@
 import ErrorIcon from "./ErrorIcon.js";
 import ErrorText from "./ErrorText.js";
-const ErrorText = (props) => {
+import "./Error.css";
+const Error = (props) => {
   return (
-    <div class="error-message">
+    <div class="error-message__container">
       <ErrorIcon></ErrorIcon>
       <ErrorText
+        className="error-message"
         id={props.id}
         remainingTime={props.remainingTime}
         waitingTime={props.waitingTime}
@@ -12,4 +14,4 @@ const ErrorText = (props) => {
     </div>
   );
 };
-export default ErrorText;
+export default Error;
