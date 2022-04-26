@@ -19,6 +19,6 @@ const ErrorText = (props) => {
       </p>
     );
   }
-  return <p class='error-message__detail'>{mainContent}</p>;
+  return <p className='error-message__detail'>{mainContent}</p>;
 };
 export default ErrorText;
