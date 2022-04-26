@@ -106,7 +106,7 @@
     height: 95px; */
     width: 100%;
     display: flex;
-    flex: column;
+    flex-direction: column;
 }
 
 .login-hr {

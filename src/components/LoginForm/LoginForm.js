@@ -64,6 +64,8 @@ const LoginForm = (props) => {
             startIcon={<GmailIcon />}
             sx={{ textTransform: 'none' }}
             color='error'
+            variant='outlined'
+            fullWidth={true}
           >
             Gmail
           </AuraButton>
