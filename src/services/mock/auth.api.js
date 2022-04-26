@@ -1,21 +1,21 @@
 // MOCK server data
-export const mockUser = {
+const mockUser = {
   email: "test@antra.com",
   passWord: "test",
   jwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJ0ZXN0QGFudHJhLmNvbSIsIm5hbWUiOiJ0ZXN0IiwidXNlcklkIjoiMTIzMjEzMTIiLCJpYXQiOjE1MTYyMzkwMjJ9.XxBVHmaT7wGOlb9zGR7CSdQ7ZAvDx4Rqlt1trv9rmTU",
 };
 
-export const ErrorMessage = {
+const ErrorMessage = {
   1: "Passwords do not match",
   2: "Email ID does not exist",
   3: "inValidErrorCode",
 };
 
-export const checkValidEmail = (user) => {
-  return user.email === mockUser.userName;
+const checkValidEmail = (user) => {
+  return user.email === mockUser.email;
 };
 
-export const checkValidPassword = (user) => {
+const checkValidPassword = (user) => {
   return user.email === mockUser.email && user.passWord === mockUser.passWord;
 };
 
@@ -48,28 +48,26 @@ export const login = (user) => {
         res(response);
       }
     }, 2000);
-  })
+  });
 };
 
 // success {errorCode:0, result:ErrorMessage}
 // fail {errorCode:3, result:null}
 export const getErrorMessage = (errorCode) => {
   return new Promise((res, rej) => {
-    setTimeout(() => {
-      /// api call server logic
-      if (ErrorMessage[errorCode]) {
-        const response = {
-          errorCode: 0,
-          result: ErrorMessage[errorCode],
-        };
-        res(response);
-      } else {
-        const response = {
-          errorCode: 3,
-          result: null,
-        };
-        res(response);
-      }
-    }, 2000);
-  })
+    /// api call server logic
+    if (ErrorMessage[errorCode]) {
+      const response = {
+        errorCode: 0,
+        result: ErrorMessage[errorCode],
+      };
+      res(response);
+    } else {
+      const response = {
+        errorCode: 3,
+        result: null,
+      };
+      res(response);
+    }
+  });
 };

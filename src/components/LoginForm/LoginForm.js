@@ -5,7 +5,7 @@ import Input from '../Input/AuraInput';
 import Error from '../Error/Error.js';
 import headerSvg from '../../assets/svg/aura-logo-icon.svg';
 import gmailIcon from '../../assets/images/gmail_icon.png';
-import { mockUser, ErrorMessage, checkValidEmail, checkValidPassword, login, getErrorMessage } from '../../services/mock/auth.api';
+import { login, getErrorMessage } from '../../services/mock/auth.api';
 
 
 
@@ -42,7 +42,7 @@ const LoginForm = (props) => {
     let user = generateUser();
     login(user)
       .then(res => {console.log(res); return getErrorMessage(res.errorCode)})
-      .then(res => {alert(res.result)});
+      .then(res => {setErrorState(res.result)});
   }
   
 
@@ -90,7 +90,7 @@ const LoginForm = (props) => {
 
           {errorState && (
             <div className='form-row'>
-              <Error id={errorState} attemptsRemaining={errorCounter}/>
+              <Error msg={errorState} attemptsRemaining={errorCounter}/>
             </div>
           )}
 
