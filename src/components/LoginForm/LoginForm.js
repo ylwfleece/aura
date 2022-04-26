@@ -1,6 +1,6 @@
 import './LoginForm.css';
 import AuraButton from '../Button/AuraButton';
-import Input from '../Input/Input';
+import Input from '../Input/AuraInput';
 import Error from '../Error/Error.js';
 import { Button } from '@mui/material';
 import headerSvg from '../../assets/svg/aura-logo-icon.svg';
@@ -14,28 +14,6 @@ const GmailIcon = () => {
 
 const LoginForm = (props) => {
   return (
-    // <div className='jumbo-card'>
-    //   <div className='jumbo-card-top'>
-    //     <img src={headerSvg} className='aura-logo-img' />
-    //   </div>
-    //   <div className='login-form-container'>
-    //     <section className='login-standard'>
-    //       <Input placeholder='Email Address' type='email' />
-
-    //       <Input placeholder='Password' type='password' />
-    //       {/* <Error /> */}
-
-    //       <AuraButton>login</AuraButton>
-    //       <span className='forgot-password'>forgot pw</span>
-    //     </section>
-    //     {/* <span className='login-hr'>___________</span> */}
-    //     <hr className='horizontal-line' />
-    //     <section className='login-google'>
-    //       <span className='login-using'>login using</span>
-    //       <AuraButton>google</AuraButton>
-    //     </section>
-    //   </div>
-    // </div>
     <div className='jumbo-card'>
       <div className='jumbo-card-top'>
         <img src={headerSvg} className='aura-logo-img' />

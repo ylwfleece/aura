@@ -5,25 +5,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1em;
-    /* opacity: 0.5; 
-    display: flex;
-    flex-direction: column;
-    padding: auto;
-    height: 420px;
-
-    margin-left: 37%;
-    margin-top: 180px; */
- 
-}
-
-.jumbo-card-top {
-    /* width: 90%; 
-    /* height: 20%;
-    display: flex;
-    flex-direction: row;
-    align-items: center; */
-    /* opacity: 0.8; */
+    padding: 1em; 
 }
 
 .aura-logo-img {
@@ -38,35 +20,18 @@
 
 
 .login-form-container {
-    /* background-color: white;
-    border-radius: 14px;
-    display: flex;
-    flex-direction: column;
-    padding: auto;
-    height: 300px;
-    width: 90%;
-    margin-left: 5%;
-    margin-top: 80px; */
-    /* width:  */
-
     width: 95%;
     background-color: white;
     border-radius: inherit;
     display: flex;
     flex-direction: column;
+    padding: 1em 0;
 
 
   
 } 
 
 .login-standard {
-    /* display: flex;
-    flex-direction: column;
-    padding: auto;
-    margin: auto;
-    margin-top: 25px;
-    height: 150px; */
-
     display: flex;
     flex-direction: column;
     width: 90%;
@@ -85,13 +50,16 @@
 }
 
 .forgot-password {
+    margin-top: 0.5em;
     margin-left: auto;
     width: fit-content;
     color: gray;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .horizontal-line {
-        width: 90%;
+    width: 90%;
     height:1px;
     border-width:0;
     color:gray;
@@ -99,15 +67,23 @@
 }
 
 .login-google {
-    /* display: flex;
-    flex-direction: column;
-    padding: auto;
-    margin: auto;
-    height: 95px; */
-    width: 100%;
+
+    width: 90%;
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
+
+
 }
+
+.login-using {
+    margin-bottom: 0.5em;
+    font-size: 14px;
+    font-weight: 600;
+    color: gray;
+}
+
+
 
 .login-hr {
     /* height: 5px; */
