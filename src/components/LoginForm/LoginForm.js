@@ -3,12 +3,9 @@ import { useState } from 'react';
 import AuraButton from '../Button/AuraButton';
 import Input from '../Input/AuraInput';
 import Error from '../Error/Error.js';
-import { Button } from '@mui/material';
 import headerSvg from '../../assets/svg/aura-logo-icon.svg';
 import gmailIcon from '../../assets/images/gmail_icon.png';
 
-// background-image: url("./assets/images/shutterstock_363952133.jpg");
-// ./assets/images/fav-icon.jpg
 
 const GmailIcon = () => {
   return <img style={{ height: '20px', width: '20px' }} src={gmailIcon} />;
