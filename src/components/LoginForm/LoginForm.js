@@ -31,7 +31,11 @@ const LoginForm = (props) => {
             <Input placeholder='Password' type='password' fullWidth={true} />
           </div>
 
-          {isError && <Error />}
+          {isError && (
+            <div className='form-row'>
+              <Error />
+            </div>
+          )}
 
           <div className='btn-container'>
             <AuraButton

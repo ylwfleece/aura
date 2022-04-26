@@ -1,6 +1,7 @@
 .error-message__container {
-  width: 40rem;
-  height: 6rem;
+  /* width: 40rem; */
+  width: 90%;
+  /* height: 6rem; */
   font-size: 1.4rem;
   color: red;
   display: flex;
