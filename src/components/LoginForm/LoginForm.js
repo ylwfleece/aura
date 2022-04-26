@@ -5,6 +5,8 @@ import Input from '../Input/AuraInput';
 import Error from '../Error/Error.js';
 import headerSvg from '../../assets/svg/aura-logo-icon.svg';
 import gmailIcon from '../../assets/images/gmail_icon.png';
+import { mockUser, ErrorMessage, checkValidEmail, checkValidPassword, login, getErrorMessage } from '../../services/mock/auth.api';
+
 
 
 const GmailIcon = () => {
@@ -26,21 +28,38 @@ const LoginForm = (props) => {
   function handlePasswordOnChange(e) {
     setPassword(e.target.value);
   }
+
+  function generateUser() {
+    return {
+      email: email,
+      passWord: password,
+      jwt:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJ0ZXN0QGFudHJhLmNvbSIsIm5hbWUiOiJ0ZXN0IiwidXNlcklkIjoiMTIzMjEzMTIiLCJpYXQiOjE1MTYyMzkwMjJ9.XxBVHmaT7wGOlb9zGR7CSdQ7ZAvDx4Rqlt1trv9rmTU"
+    };
+  }
+
+  function mockLogin() {
+    let user = generateUser();
+    login(user)
+      .then(res => {console.log(res); return getErrorMessage(res.errorCode)})
+      .then(res => {alert(res.result)});
+  }
   
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    if (email === 'test@gmail.com' && password === 'test') {
-      setErrorCounter(5);
-      setErrorState('');
-      alert('successfully logged in');
-    } else if (errorCounter===1){
-      setErrorState('abused-login');
-      setIsDisabled(true);
-    } else {
-      setErrorCounter(errorCounter-1);
-      setErrorState('wrong-password');
-    }
+    mockLogin();
+    // if (email === 'test@gmail.com' && password === 'test') {
+    //   setErrorCounter(5);
+    //   setErrorState('');
+    //   alert('successfully logged in');
+    // } else if (errorCounter===1){
+    //   setErrorState('abused-login');
+    //   setIsDisabled(true);
+    // } else {
+    //   setErrorCounter(errorCounter-1);
+    //   setErrorState('wrong-password');
+    // }
     console.log('Username: '+email)
     console.log('Password: '+password)
   }
