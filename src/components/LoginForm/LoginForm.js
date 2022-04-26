@@ -15,7 +15,34 @@ const GmailIcon = () => {
 };
 
 const LoginForm = (props) => {
-  const [isError, setIsError] = useState(true);
+  const [isError, setIsError] = useState(false);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  function handleEmailOnChange(e) {
+    setEmail(e.target.value);
+  }
+
+  function handlePasswordOnChange(e) {
+    setPassword(e.target.value);
+  }
+
+  function toggleError() {
+    setIsError((prevState) => !prevState);
+  }
+
+  function handleFormSubmit(e) {
+    console.log('email:', email);
+    console.log('password:', password);
+    e.preventDefault();
+    if (email === 'test@gmail.com' && password === 'test') {
+      setIsError(false);
+      alert('successfully logged in');
+    } else {
+      setIsError(true);
+    }
+  }
 
   return (
     <div className='jumbo-card'>
@@ -25,19 +52,34 @@ const LoginForm = (props) => {
       <div className='login-form-container'>
         <section className='login-standard'>
           <div className='form-row'>
-            <Input placeholder='Email Address' type='email' fullWidth={true} />
+            <Input
+              placeholder='Email Address'
+              type='email'
+              fullWidth={true}
+              onChange={(e) => handleEmailOnChange(e)}
+            />
           </div>
           <div className='form-row'>
-            <Input placeholder='Password' type='password' fullWidth={true} />
+            <Input
+              placeholder='Password'
+              type='password'
+              fullWidth={true}
+              onChange={(e) => handlePasswordOnChange(e)}
+            />
           </div>
 
-          {isError && <Error />}
+          {isError && (
+            <div className='form-row'>
+              <Error />
+            </div>
+          )}
 
           <div className='btn-container'>
             <AuraButton
               variant='contained'
               fullWidth={true}
               sx={{ padding: '16px 0px' }}
+              onClick={handleFormSubmit}
             >
               Login
             </AuraButton>
