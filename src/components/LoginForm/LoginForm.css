@@ -66,8 +66,10 @@
     border-width:0;
     color:gray;
     background-color:#cfc9c9;
+    margin: 0 auto;
     margin-top: 1em;
     margin-bottom: 0.7em;
+    
 }
 
 .login-google {
