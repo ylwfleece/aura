@@ -12,7 +12,6 @@ const GmailIcon = () => {
 };
 
 const LoginForm = (props) => {
-  const [isError, setIsError] = useState(false);
   const [errorCounter, setErrorCounter] = useState(5);
   const [isDisabled, setIsDisabled] = useState(false);
 
