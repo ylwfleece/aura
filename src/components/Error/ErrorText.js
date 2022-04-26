@@ -7,18 +7,18 @@ const ErrorText = (props) => {
   } else if (props.id === 'abused-login') {
     mainContent = (
       <p>
-        Your account has been locked because of consecutive failed login
-        attempts. Please try again in <span>{props.waitingTime}</span> minute
+        Your account has been locked because of consecutive failed login attempts. 
+        {/* Please try again in <span>{props.waitingTime}</span> minute */}
       </p>
     );
   } else if (props.id === 'wrong-password') {
     mainContent = (
       <p>
-        Invalid Credentials. Attemps Remaining:{' '}
-        <span> {props.remainingTime}</span>
+        Invalid Credentials. Attemps Remaining: {[props.attemptsRemaining]}
+        {/* <span> {props.remainingTime}</span> */}
       </p>
     );
   }
-  return <p className='error-message__detail'>{mainContent}</p>;
+  return <span className='error-message__detail'>{mainContent}</span>;
 };
 export default ErrorText;

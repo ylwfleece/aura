@@ -8,8 +8,9 @@ const Error = (props) => {
       <ErrorText
         className="error-message"
         id={props.id}
-        remainingTime={props.remainingTime}
-        waitingTime={props.waitingTime}
+        attemptsRemaining={props.attemptsRemaining}
+        // remainingTime={props.remainingTime}
+        // waitingTime={props.waitingTime}
       ></ErrorText>
     </div>
   );

@@ -13,9 +13,12 @@ const GmailIcon = () => {
 
 const LoginForm = (props) => {
   const [isError, setIsError] = useState(false);
+  const [errorCounter, setErrorCounter] = useState(5);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorState, setErrorState] = useState('');
 
   function handleEmailOnChange(e) {
     setEmail(e.target.value);
@@ -24,27 +27,28 @@ const LoginForm = (props) => {
   function handlePasswordOnChange(e) {
     setPassword(e.target.value);
   }
-
-  // function toggleError() {
-  //   setIsError((prevState) => !prevState);
-  // }
+  
 
   function handleFormSubmit(e) {
-    console.log('email:', email);
-    console.log('password:', password);
     e.preventDefault();
     if (email === 'test@gmail.com' && password === 'test') {
-      setIsError(false);
+      setErrorCounter(5);
+      setErrorState('');
       alert('successfully logged in');
+    } else if (errorCounter===1){
+      setErrorState('abused-login');
+      setIsDisabled(true);
     } else {
-      setIsError(true);
+      setErrorCounter(errorCounter-1);
+      setErrorState('wrong-password');
     }
+    console.log('Username: '+email)
+    console.log('Password: '+password)
   }
-
   return (
     <div className='jumbo-card'>
       <div className='jumbo-card-top'>
-        <img src={headerSvg} className='aura-logo-img' />
+        <img src={headerSvg} className='aura-logo-img' alt='Aura Logo'/>
       </div>
       <div className='login-form-container'>
         <section className='login-standard'>
@@ -54,6 +58,7 @@ const LoginForm = (props) => {
               type='email'
               fullWidth={true}
               onChange={handleEmailOnChange}
+              
             />
           </div>
           <div className='form-row'>
@@ -65,14 +70,15 @@ const LoginForm = (props) => {
             />
           </div>
 
-          {isError && (
+          {errorState && (
             <div className='form-row'>
-              <Error />
+              <Error id={errorState} attemptsRemaining={errorCounter}/>
             </div>
           )}
 
           <div className='btn-container'>
             <AuraButton
+              disabled={isDisabled}
               variant='contained'
               fullWidth={true}
               sx={{ padding: '16px 0px' }}
