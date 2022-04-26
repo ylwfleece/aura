@@ -25,9 +25,9 @@ const LoginForm = (props) => {
     setPassword(e.target.value);
   }
 
-  function toggleError() {
-    setIsError((prevState) => !prevState);
-  }
+  // function toggleError() {
+  //   setIsError((prevState) => !prevState);
+  // }
 
   function handleFormSubmit(e) {
     console.log('email:', email);
@@ -53,7 +53,7 @@ const LoginForm = (props) => {
               placeholder='Email Address'
               type='email'
               fullWidth={true}
-              onChange={(e) => handleEmailOnChange(e)}
+              onChange={handleEmailOnChange}
             />
           </div>
           <div className='form-row'>
@@ -61,7 +61,7 @@ const LoginForm = (props) => {
               placeholder='Password'
               type='password'
               fullWidth={true}
-              onChange={(e) => handlePasswordOnChange(e)}
+              onChange={handlePasswordOnChange}
             />
           </div>
 
@@ -85,7 +85,6 @@ const LoginForm = (props) => {
             </a>
           </div>
         </section>
-        {/* <span className='login-hr'>___________</span> */}
         <hr className='horizontal-line' />
         <section className='login-google'>
           <span className='login-using'>Login using</span>
