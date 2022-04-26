@@ -1,10 +1,12 @@
 import './LoginForm.css';
+import { useState } from 'react';
 import AuraButton from '../Button/AuraButton';
 import Input from '../Input/AuraInput';
 import Error from '../Error/Error.js';
 import { Button } from '@mui/material';
 import headerSvg from '../../assets/svg/aura-logo-icon.svg';
 import gmailIcon from '../../assets/images/gmail_icon.png';
+
 // background-image: url("./assets/images/shutterstock_363952133.jpg");
 // ./assets/images/fav-icon.jpg
 
@@ -13,6 +15,8 @@ const GmailIcon = () => {
 };
 
 const LoginForm = (props) => {
+  const [isError, setIsError] = useState(true);
+
   return (
     <div className='jumbo-card'>
       <div className='jumbo-card-top'>
@@ -27,11 +31,19 @@ const LoginForm = (props) => {
             <Input placeholder='Password' type='password' fullWidth={true} />
           </div>
 
+          {isError && <Error />}
+
           <div className='btn-container'>
-            <AuraButton variant='contained' fullWidth={true}>
+            <AuraButton
+              variant='contained'
+              fullWidth={true}
+              sx={{ padding: '16px 0px' }}
+            >
               Login
             </AuraButton>
-            <span className='forgot-password'>Forgot Password?</span>
+            <a className='forgot-password' href='##'>
+              Forgot Password?
+            </a>
           </div>
         </section>
         {/* <span className='login-hr'>___________</span> */}
@@ -40,7 +52,7 @@ const LoginForm = (props) => {
           <span className='login-using'>Login using</span>
           <AuraButton
             startIcon={<GmailIcon />}
-            sx={{ textTransform: 'none' }}
+            sx={{ textTransform: 'none', padding: '16px 0px' }}
             color='error'
             variant='outlined'
             fullWidth={true}
