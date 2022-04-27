@@ -36,11 +36,9 @@ const LoginForm = (props) => {
     }
     login(user)
       .then((res) => {
-        console.log(res);
         return getErrorMessage(res.errorCode);
       })
       .then((res) => {
-        //setIsLoading(false);
         setErrorState(res.result);
       });
     console.log('Email: '+email)
