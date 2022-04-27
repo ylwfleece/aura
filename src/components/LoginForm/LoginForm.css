@@ -32,6 +32,7 @@
   flex-direction: column;
   width: 90%;
   margin: 0 auto;
+  position: relative;
 }
 
 .form-row {
@@ -79,8 +80,4 @@
   font-size: 14px;
   font-weight: 600;
   color: gray;
-}
-
-.login-hr {
-  /* height: 5px; */
 }

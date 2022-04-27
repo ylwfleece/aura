@@ -1,12 +1,11 @@
 .error-message__container {
-  /* width: 40rem; */
-  width: 90%;
-  /* height: 6rem; */
-  font-size: 1rem;
+  width: 100%;
+  font-size: 0.9rem;
   color: red;
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 .errIcon {
   fill: red;

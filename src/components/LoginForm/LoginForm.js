@@ -1,16 +1,11 @@
 import "./LoginForm.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuraButton from "../Button/AuraButton";
 import Input from "../Input/AuraInput";
-import Error from "../Error/Error.js";
-import headerSvg from "../../assets/svg/aura-logo-icon.svg";
-import gmailIcon from "../../assets/images/gmail_icon.png";
+import LoginError from "../Error/LoginError.js";
+
 import Spinner from "../Spinner/Spinner.js";
 import { login, getErrorMessage } from "../../services/mock/auth.api";
-
-const GmailIcon = () => {
-  return <img style={{ height: "20px", width: "20px" }} src={gmailIcon} />;
-};
 
 const LoginForm = (props) => {
   const [errorCounter, setErrorCounter] = useState(5);
@@ -19,93 +14,109 @@ const LoginForm = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorState, setErrorState] = useState("");
+  const user = { email, passWord: password };
 
   function handleEmailOnChange(e) {
-    setEmail(e.target.value);
+    setEmail(e.target.value.trim());
   }
-
   function handlePasswordOnChange(e) {
-    setPassword(e.target.value);
+    setPassword(e.target.value.trim());
+  }
+  async function handleLogin(user) {
+    setIsLoading(true);
+    const resLoginStatus = await login(user);
+    console.log(resLoginStatus);
+    if (resLoginStatus.result) {
+      console.log("User is logged in");
+      setIsLoading(false);
+    } else {
+      const resErrMes = await getErrorMessage(resLoginStatus.errorCode);
+      console.log(resErrMes);
+
+      if (resErrMes.result) {
+        const errMes = resErrMes.result;
+        setErrorState(errMes);
+        console.log(errMes);
+        setIsLoading(false);
+      } else {
+        const findErr = await getErrorMessage(resErrMes.errorCode);
+        const errMes = findErr.result;
+        setErrorState(errMes);
+        console.log(errMes);
+        setIsLoading(false);
+      }
+    }
   }
 
   function handleFormSubmit(e) {
     e.preventDefault();
-
-    if (email === "test@gmail.com" && password === "test") {
-      setErrorCounter(5);
-      setErrorState("");
-      alert("successfully logged in");
-    } else if (errorCounter === 1) {
-      setErrorState("abused-login");
-      setIsDisabled(true);
-    } else {
-      setErrorCounter(errorCounter - 1);
-      setErrorState("wrong-password");
+    if (!email) {
+      setErrorState("Please enter your email address.");
+      return;
+    } else if (!password) {
+      setErrorState("Please enter your password.");
+      return;
     }
-    console.log("Username: " + email);
-    console.log("Password: " + password);
+    handleLogin(user);
+
+    setErrorState("");
+    // setEmail("");
+    // setPassword("");
+    // if (email === "test@gmail.com" && password === "test") {
+    //   setErrorCounter(5);
+    //   setErrorState("");
+    //   alert("successfully logged in");
+    // } else if (errorCounter === 1) {
+    //   setErrorState("abused-login");
+    //   setIsDisabled(true);
+    // } else {
+    //   setErrorCounter(errorCounter - 1);
+    //   setErrorState("wrong-password");
+    // }
+    // console.log("Username: " + email);
+    // console.log("Password: " + password);
   }
   return (
-    <div className="jumbo-card">
-      <div className="jumbo-card-top">
-        <img src={headerSvg} className="aura-logo-img" alt="Aura Logo" />
+    <form className="login-standard">
+      {isLoading && <Spinner />}
+      <div className="form-row">
+        <Input
+          placeholder="Email Address"
+          type="email"
+          fullWidth={true}
+          onChange={handleEmailOnChange}
+        />
       </div>
-      <div className="login-form-container">
-        <form onSubmit={handleFormSubmit} className="login-standard">
-          <div className="form-row">
-            <Input
-              placeholder="Email Address"
-              type="email"
-              fullWidth={true}
-              onChange={handleEmailOnChange}
-            />
-          </div>
-          <div className="form-row">
-            <Input
-              placeholder="Password"
-              type="password"
-              fullWidth={true}
-              onChange={handlePasswordOnChange}
-            />
-          </div>
-
-          {errorState && (
-            <div className="form-row">
-              <Error id={errorState} attemptsRemaining={errorCounter} />
-            </div>
-          )}
-
-          <div className="btn-container">
-            <AuraButton
-              disabled={isDisabled}
-              variant="contained"
-              fullWidth={true}
-              sx={{ padding: "16px 0px" }}
-            >
-              Login
-            </AuraButton>
-
-            <a className="forgot-password" href="##">
-              Forgot Password?
-            </a>
-          </div>
-        </form>
-
-        <section className="login-google">
-          <hr className="horizontal-line" />
-          <span className="login-using">Login using</span>
-          <AuraButton
-            startIcon={<GmailIcon />}
-            sx={{ textTransform: "none", padding: "16px 0px" }}
-            color="error"
-            variant="outlined"
-            fullWidth={true}
-          >
-            Gmail
-          </AuraButton>
-        </section>
+      <div className="form-row">
+        <Input
+          placeholder="Password"
+          type="password"
+          fullWidth={true}
+          onChange={handlePasswordOnChange}
+          autoComplete="on"
+        />
       </div>
-    </div>
+
+      {errorState && (
+        <LoginError errMes={errorState} attemptsRemaining={errorCounter} />
+      )}
+
+      <div className="btn-container">
+        <AuraButton
+          disabled={isDisabled}
+          variant="contained"
+          fullWidth={true}
+          sx={{ padding: "16px 0px" }}
+          onClick={handleFormSubmit}
+        >
+          Login
+        </AuraButton>
+
+        <a className="forgot-password" href="##">
+          Forgot Password?
+        </a>
+      </div>
+    </form>
   );
 };
 
