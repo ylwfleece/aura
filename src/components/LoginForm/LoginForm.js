@@ -5,6 +5,7 @@ import Input from '../Input/AuraInput';
 import Error from '../Error/Error.js';
 import headerSvg from '../../assets/svg/aura-logo-icon.svg';
 import gmailIcon from '../../assets/images/gmail_icon.png';
+import { login, getErrorMessage } from '../../services/mock/auth.api';
 
 
 const GmailIcon = () => {
@@ -12,8 +13,8 @@ const GmailIcon = () => {
 };
 
 const LoginForm = (props) => {
-  const [errorCounter, setErrorCounter] = useState(5);
-  const [isDisabled, setIsDisabled] = useState(false);
+  //const [errorCounter, setErrorCounter] = useState(5);
+  //const [isDisabled, setIsDisabled] = useState(false);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,23 +28,30 @@ const LoginForm = (props) => {
     setPassword(e.target.value);
   }
   
+  function getUserInfo(){
+    return {
+      email: email,
+      passWord: password,
+      jwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJ0ZXN0QGFudHJhLmNvbSIsIm5hbWUiOiJ0ZXN0IiwidXNlcklkIjoiMTIzMjEzMTIiLCJpYXQiOjE1MTYyMzkwMjJ9.XxBVHmaT7wGOlb9zGR7CSdQ7ZAvDx4Rqlt1trv9rmTU"
+    }
+  }
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    if (email === 'test@gmail.com' && password === 'test') {
-      setErrorCounter(5);
-      setErrorState('');
-      alert('successfully logged in');
-    } else if (errorCounter===1){
-      setErrorState('abused-login');
-      setIsDisabled(true);
-    } else {
-      setErrorCounter(errorCounter-1);
-      setErrorState('wrong-password');
-    }
-    console.log('Username: '+email)
+    let user = getUserInfo();
+    login(user)
+      .then((res) => {
+        console.log(res);
+        return getErrorMessage(res.errorCode);
+      })
+      .then((res) => {
+        //setIsLoading(false);
+        setErrorState(res.result);
+      });
+    console.log('Email: '+email)
     console.log('Password: '+password)
   }
+
   return (
     <div className='jumbo-card'>
       <div className='jumbo-card-top'>
@@ -71,13 +79,12 @@ const LoginForm = (props) => {
 
           {errorState && (
             <div className='form-row'>
-              <Error id={errorState} attemptsRemaining={errorCounter}/>
+              <Error val={errorState} />
             </div>
           )}
 
           <div className='btn-container'>
             <AuraButton
-              disabled={isDisabled}
               variant='contained'
               fullWidth={true}
               sx={{ padding: '16px 0px' }}

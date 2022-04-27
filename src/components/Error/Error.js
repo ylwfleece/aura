@@ -6,9 +6,9 @@ const Error = (props) => {
     <div className="error-message__container">
       <ErrorIcon></ErrorIcon>
       <ErrorText
-        className="error-message"
-        id={props.id}
-        attemptsRemaining={props.attemptsRemaining}
+        // className="error-message"
+        // val={props.val}
+        // attemptsRemaining={props.attemptsRemaining}
         // remainingTime={props.remainingTime}
         // waitingTime={props.waitingTime}
       ></ErrorText>
