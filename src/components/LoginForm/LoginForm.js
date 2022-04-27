@@ -13,14 +13,9 @@ const GmailIcon = () => {
 };
 
 const LoginForm = (props) => {
-  // const [errorCounter, setErrorCounter] = useState(5);
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [jwtToken, setJwtToken] = useState(null);
-
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [errorState, setErrorState] = useState('');
 
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');

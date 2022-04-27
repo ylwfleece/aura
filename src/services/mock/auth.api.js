@@ -23,7 +23,6 @@ const checkValidPassword = (user) => {
 // sucess   {errorCode:0, result:{jwt:XXXX }}
 //  fail    {errorCode:1, result:null}
 export const login = (user) => {
-  console.log(user);
   return new Promise((res, rej) => {
     setTimeout(() => {
       /// api call server logic
