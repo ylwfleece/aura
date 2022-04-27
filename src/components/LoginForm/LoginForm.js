@@ -27,18 +27,13 @@ const LoginForm = (props) => {
   function handlePasswordOnChange(e) {
     setPassword(e.target.value);
   }
-  
-  function getUserInfo(){
-    return {
-      email: email,
-      passWord: password,
-      jwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJ0ZXN0QGFudHJhLmNvbSIsIm5hbWUiOiJ0ZXN0IiwidXNlcklkIjoiMTIzMjEzMTIiLCJpYXQiOjE1MTYyMzkwMjJ9.XxBVHmaT7wGOlb9zGR7CSdQ7ZAvDx4Rqlt1trv9rmTU"
-    }
-  }
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    let user = getUserInfo();
+    let user = {
+      email: email,
+      passWord: password
+    }
     login(user)
       .then((res) => {
         console.log(res);
