@@ -47,7 +47,7 @@ export const login = (user) => {
         };
         res(response);
       }
-    }, 2000);
+    }, 500);
   });
 };
 
@@ -69,5 +69,5 @@ export const getErrorMessage = (errorCode) => {
       };
       res(response);
     }
-  }, 2000);
+  }, 500);
 };

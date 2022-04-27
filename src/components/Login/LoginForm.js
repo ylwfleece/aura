@@ -1,5 +1,5 @@
 import "./LoginForm.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AuraButton from "../Button/AuraButton";
 import Input from "../Input/AuraInput";
 import LoginError from "../Error/LoginError.js";
@@ -58,23 +58,21 @@ const LoginForm = (props) => {
       return;
     }
     handleLogin(user);
-
-    setErrorState("");
-    // setEmail("");
-    // setPassword("");
-    // if (email === "test@gmail.com" && password === "test") {
-    //   setErrorCounter(5);
-    //   setErrorState("");
-    //   alert("successfully logged in");
-    // } else if (errorCounter === 1) {
-    //   setErrorState("abused-login");
-    //   setIsDisabled(true);
-    // } else {
-    //   setErrorCounter(errorCounter - 1);
-    //   setErrorState("wrong-password");
+    // if (errorState === "Invalid Credentials. Attemps Remaining:") {
+    //   if (errorCounter === 0) {
+    //     setErrorState(
+    //       "Your account has been locked because of consecutive failed login attempts."
+    //     );
+    //     setIsDisabled(true);
+    //   } else {
+    //     setErrorCounter(errorCounter - 1);
+    //     setErrorState(
+    //       `Invalid Credentials. Attemps Remaining: ${errorCounter - 1}`
+    //     );
+    //   }
     // }
-    // console.log("Username: " + email);
-    // console.log("Password: " + password);
+    setErrorState("");
+    // setErrorCounter(5);
   }
   return (
     <form className="login-standard">
