@@ -27,14 +27,9 @@ const LoginForm = (props) => {
   function handlePasswordOnChange(e) {
     setPassword(e.target.value);
   }
-
   function handleFormSubmit(e) {
     e.preventDefault();
-    let user = {
-      email: email,
-      passWord: password
-    }
-    login(user)
+    login({email: email, passWord: password})
       .then((res) => {
         return getErrorMessage(res.errorCode);
       })
