@@ -1,7 +1,7 @@
 import './LoginForm.css';
 import { useState } from 'react';
 import AuraButton from '../Button/AuraButton';
-import Input from '../Input/AuraInput';
+import Input from '../AuraInput/AuraInput';
 import Error from '../Error/Error.js';
 import headerSvg from '../../assets/svg/aura-logo-icon.svg';
 import gmailIcon from '../../assets/images/gmail_icon.png';
@@ -27,7 +27,7 @@ const LoginForm = (props) => {
     setPassword(e.target.value);
   }
   
-
+  
   function handleFormSubmit(e) {
     e.preventDefault();
     if (email === 'test@gmail.com' && password === 'test') {
