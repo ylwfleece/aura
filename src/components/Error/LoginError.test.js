@@ -1,12 +1,17 @@
 import LoginError from "./LoginError.js";
-import { screen, render } from "@testing-library/react";
+import React from "react";
+import { render } from "@testing-library/react";
 
-describe("Error component", () => {
-  test("renders non-existed email ID", () => {
-    render(<LoginError />);
-    const wrEmail = screen.getByText("Email ID does not exist.", {
-      exact: false,
-    });
-    expect(wrEmail).toBeInTheDocument();
+describe("LoginError", () => {
+  it("should render default login error", () => {
+    const errProps = {
+      onClick: jest.fn(),
+    };
+
+    const wrapper = render(<LoginError {...errProps}></LoginError>);
+
+    expect(wrapper.container.firstChild).toHaveClass(
+      "error-message__container"
+    );
   });
 });

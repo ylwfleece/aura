@@ -3,7 +3,7 @@ import { useState } from "react";
 import AuraButton from "../Button/AuraButton";
 import Input from "../Input/AuraInput";
 import LoginError from "../Error/LoginError.js";
-
+import { useInput } from "../hooks/useInput.js";
 import Spinner from "../Spinner/Spinner.js";
 import { login, getErrorMessage } from "../../services/mock/auth.api";
 
@@ -11,40 +11,33 @@ const LoginForm = (props) => {
   const [errorCounter, setErrorCounter] = useState(5);
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [errorState, setErrorState] = useState("");
+  const [email, handleEmailChange, resetEmail] = useInput();
+  const [password, handlePasswordChange, resetPassword] = useInput();
   const user = { email, passWord: password };
+  const [loginToken, setLoginToken] = useState(null);
 
-  function handleEmailOnChange(e) {
-    setEmail(e.target.value.trim());
-  }
-  function handlePasswordOnChange(e) {
-    setPassword(e.target.value.trim());
-  }
   async function handleLogin(user) {
     setIsLoading(true);
     const resLoginStatus = await login(user);
-    console.log(resLoginStatus);
-    if (resLoginStatus.result) {
+    if (resLoginStatus.errorCode === 0) {
       console.log("User is logged in");
       setIsLoading(false);
+      setLoginToken(resLoginStatus.result);
+      console.log(loginToken);
     } else {
       const resErrMes = await getErrorMessage(resLoginStatus.errorCode);
       console.log(resErrMes);
-
-      if (resErrMes.result) {
-        const errMes = resErrMes.result;
-        setErrorState(errMes);
-        console.log(errMes);
-        setIsLoading(false);
-      } else {
+      let errMes;
+      if (resErrMes.errorCode === "3") {
         const findErr = await getErrorMessage(resErrMes.errorCode);
-        const errMes = findErr.result;
-        setErrorState(errMes);
-        console.log(errMes);
-        setIsLoading(false);
+        errMes = findErr.result;
+      } else {
+        errMes = resErrMes.result;
       }
+      setErrorState(errMes);
+      console.log(errMes);
+      setIsLoading(false);
     }
   }
 
@@ -57,7 +50,13 @@ const LoginForm = (props) => {
       setErrorState("Please enter your password.");
       return;
     }
-    handleLogin(user);
+    handleLogin(user).then(() => {
+      console.log(errorState);
+      setErrorState("");
+      resetEmail();
+      resetPassword();
+      console.log(loginToken);
+    });
     // if (errorState === "Invalid Credentials. Attemps Remaining:") {
     //   if (errorCounter === 0) {
     //     setErrorState(
@@ -71,26 +70,28 @@ const LoginForm = (props) => {
     //     );
     //   }
     // }
-    setErrorState("");
     // setErrorCounter(5);
   }
+
   return (
     <form className="login-standard">
       {isLoading && <Spinner />}
       <div className="form-row">
         <Input
           placeholder="Email Address"
+          value={email}
           type="email"
           fullWidth={true}
-          onChange={handleEmailOnChange}
+          onChange={handleEmailChange}
         />
       </div>
       <div className="form-row">
         <Input
           placeholder="Password"
+          value={password}
           type="password"
           fullWidth={true}
-          onChange={handlePasswordOnChange}
+          onChange={handlePasswordChange}
           autoComplete="on"
         />
       </div>
