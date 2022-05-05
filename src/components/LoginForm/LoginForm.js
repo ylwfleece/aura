@@ -7,6 +7,7 @@ import headerSvg from '../../assets/svg/aura-logo-icon.svg';
 import gmailIcon from '../../assets/images/gmail_icon.png';
 import AuraLoadingButton from '../AuraLoadingButton/AuraLoadingButton';
 import { login, getErrorMessage } from '../../services/mock/auth.api';
+import { useFormLogic } from '../../hooks/useFormLogic';
 
 const GmailIcon = () => {
   return <img style={{ height: '20px', width: '20px' }} src={gmailIcon} />;
@@ -20,18 +21,26 @@ const LoginForm = (props) => {
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const [user, setUser] = useState({
-    email: '',
-    password: '',
+  // const [user, setUser] = useState({
+  //   email: '',
+  //   password: '',
+  // });
+
+  const [user, setUser, handleChange, handleSubmit] = useFormLogic({
+    initialFormState: {
+      email: 'patrick@antra.com',
+      password: '',
+    },
+    handleFormSubmit: handleLogin,
   });
 
-  function handleChange(e) {
-    const value = e.target.value;
-    setUser({
-      ...user,
-      [e.target.name]: value,
-    });
-  }
+  // function handleChange(e) {
+  //   const value = e.target.value;
+  //   setUser({
+  //     ...user,
+  //     [e.target.name]: value,
+  //   });
+  // }
 
   function handleError(errorCode) {
     setIsError(true);
@@ -40,21 +49,23 @@ const LoginForm = (props) => {
     });
   }
 
-  function handleLogin() {
+  function handleLogin(user) {
+    // console.log('user', user);
     setIsLoading(true);
-    login(user).then((response) => {
+    const userForLogin = {
+      email: user.email,
+      passWord: user.password,
+    };
+    login(userForLogin).then((response) => {
       console.log('response', response);
       if (response.errorCode === 0) {
+        alert('successfully logged in');
         setJwtToken(response.result.jwt);
-      } else if (response.errorCode === 1) {
-        handleError(response.errorCode);
-      } else if (response.errorCode === 2) {
-        handleError(response.errorCode);
       } else {
         handleError(response.errorCode);
       }
-
       setIsLoading(false);
+      setUser({ email: '', password: '' });
     });
   }
   return (
@@ -105,7 +116,7 @@ const LoginForm = (props) => {
                 variant='contained'
                 fullWidth={true}
                 sx={{ padding: '16px 0px' }}
-                onClick={handleLogin}
+                onClick={handleSubmit}
               >
                 Login
               </AuraButton>

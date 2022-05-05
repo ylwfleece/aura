@@ -12,7 +12,7 @@ const ErrorMessage = {
 };
 
 const checkValidEmail = (user) => {
-  return user.email === mockUser.userName;
+  return user.email === mockUser.email;
 };
 
 const checkValidPassword = (user) => {
