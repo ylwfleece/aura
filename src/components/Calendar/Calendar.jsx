@@ -7,10 +7,14 @@ function Calendar() {
       <div className='date-picker show'>
         <div className='date-picker-header'>
           <span className='date-picker-header-title'>Payroll Calendar</span>
-          <div className='date-picker-header-buttons'>
-            <button className='prev-month-button month-button'>&larr;</button>
+          <div className='date-picker-header-buttons selected'>
+            <button className='prev-month-button month-button selected'>
+              &larr;
+            </button>
             <div className='current-month'>Oct 2020</div>
-            <button className='next-month-button month-button'>&rarr;</button>
+            <button className='next-month-button month-button selected'>
+              &rarr;
+            </button>
           </div>
         </div>
         <div className='date-picker-grid-header date-picker-grid'>
@@ -18,7 +22,7 @@ function Calendar() {
           <div>Mon</div>
           <div>Tue</div>
           <div>Wed</div>
-          <div>Thu</div>
+          <div className='selected'>Thu</div>
           <div>Fri</div>
           <div>Sat</div>
         </div>

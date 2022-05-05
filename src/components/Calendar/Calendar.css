@@ -1,6 +1,7 @@
 .date-picker-container {
     position: relative;
     display: inline-block;
+
 }
 
 .date-picker-button {
@@ -26,6 +27,7 @@
     font-weight: bold;
     font-size: .8rem;
     align-items: center;
+    color: gray;
 }
 
 .date-picker-header-buttons {
@@ -34,6 +36,7 @@
     font-weight: bold;
     font-size: .8rem;
     align-items: center;
+    color: gray;
 }
 
 .date-picker-grid {
@@ -49,12 +52,17 @@
     align-items: center;
     width: 100%;
     height: 100%;
+    color: gray;
 }
 
 .date-picker-grid-header {
     font-weight: bold;
     font-size: .75rem;
     color: #333;
+}
+
+.date-picker-grid-header > *{
+    color: gray;
 }
 
 .date-picker-grid-dates {
@@ -94,4 +102,8 @@
 .date.selected {
     background-color: hsl(200, 100%, 50%);
     color: white;
+}
+
+.selected{
+    color: hsl(200, 100%, 50%);
 }
