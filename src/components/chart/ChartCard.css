@@ -1,0 +1,10 @@
+.chart-card {
+  background-color: transparent;
+  border-radius: 5;
+  box-shadow: 2;
+  width: 320;
+  height: 120;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  box-sizing: border-box;
+}

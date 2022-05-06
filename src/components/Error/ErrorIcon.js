@@ -3,6 +3,7 @@ const ErrorIcon = () => {
   return (
     <div>
       <svg
+        data-testid="errIcon"
         className="errIcon"
         xmlns="http://www.w3.org/2000/svg"
         width="20"

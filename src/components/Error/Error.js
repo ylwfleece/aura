@@ -5,13 +5,17 @@ const Error = (props) => {
   return (
     <div className="error-message__container">
       <ErrorIcon></ErrorIcon>
-      <ErrorText
-        className="error-message"
-        id={props.id}
-        attemptsRemaining={props.attemptsRemaining}
+      <div
+        errmes={props.errmess}
+        className="error-message__detail"
+        data-testid="errMes"
+
+        // attemptsRemaining={props.attemptsRemaining}
         // remainingTime={props.remainingTime}
         // waitingTime={props.waitingTime}
-      ></ErrorText>
+      >
+        {props.errmes}
+      </div>
     </div>
   );
 };
