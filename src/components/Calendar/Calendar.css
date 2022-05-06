@@ -9,7 +9,7 @@
 }
 
 .date-picker {
-    display: none;
+   
     position: absolute;
     margin-top: 1rem;
     top: 100%;
@@ -27,7 +27,7 @@
     font-weight: bold;
     font-size: .8rem;
     align-items: center;
-    color: gray;
+    color: rgb(102, 102, 102);
 }
 
 .date-picker-header-buttons {
@@ -52,7 +52,7 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    color: gray;
+    color: rgb(85, 85, 85);
 }
 
 .date-picker-grid-header {

@@ -1,18 +1,77 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Calendar.css';
+import {
+  format,
+  startOfMonth,
+  startOfWeek,
+  endOfWeek,
+  endOfMonth,
+  eachDayOfInterval,
+  addMonths,
+  subMonths,
+  isSameMonth,
+  isSameDay,
+} from 'date-fns';
+import { elementAcceptingRef } from '@mui/utils';
 
 function Calendar() {
+  const [currentDate, setCurrentDate] = useState(new Date());
+  //   const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth())
+
+  const [selectedDate, setSelectedDate] = useState(currentDate);
+
+  const [monthDates, setMonthDates] = useState([]);
+
+  useEffect(() => {
+    console.log('current date', currentDate);
+    const monthDatesResult = getMonthDates(currentDate);
+    setMonthDates(monthDatesResult);
+    console.log('monthDates', monthDates);
+  }, [currentDate]);
+
+  const getMonthDates = (currentDate) => {
+    console.log('start of Month', startOfMonth(currentDate));
+    const startDay = startOfWeek(startOfMonth(currentDate));
+    const endDay = endOfWeek(endOfMonth(currentDate));
+    console.log('endDay', endDay);
+    const eachDayOfCalendarMonth = eachDayOfInterval({
+      start: startDay,
+      end: endDay,
+    });
+    // console.log('each day of current calendar', eachDayOfCalendar);
+    return eachDayOfCalendarMonth;
+  };
+
+  const handleNext = () => {
+    setCurrentDate((prevDate) => addMonths(prevDate, 1));
+  };
+
+  const handlePrev = () => {
+    setCurrentDate((prevDate) => subMonths(prevDate, 1));
+  };
+
+  const isInCurrentMonth = (date1, date2) => {
+    return isSameMonth(date1, date2);
+  };
   return (
     <div className='date-picker-container'>
-      <div className='date-picker show'>
+      <div className='date-picker'>
         <div className='date-picker-header'>
           <span className='date-picker-header-title'>Payroll Calendar</span>
           <div className='date-picker-header-buttons selected'>
-            <button className='prev-month-button month-button selected'>
+            <button
+              className='prev-month-button month-button selected'
+              onClick={handlePrev}
+            >
               &larr;
             </button>
-            <div className='current-month'>Oct 2020</div>
-            <button className='next-month-button month-button selected'>
+            <div className='current-month'>
+              {format(currentDate, 'MMM yyyy')}
+            </div>
+            <button
+              className='next-month-button month-button selected'
+              onClick={handleNext}
+            >
               &rarr;
             </button>
           </div>
@@ -22,46 +81,31 @@ function Calendar() {
           <div>Mon</div>
           <div>Tue</div>
           <div>Wed</div>
-          <div className='selected'>Thu</div>
+          <div>Thu</div>
           <div>Fri</div>
           <div>Sat</div>
         </div>
         <div className='date-picker-grid-dates date-picker-grid'>
-          <button className='date date-picker-other-month-date'>27</button>
-          <button className='date date-picker-other-month-date'>28</button>
-          <button className='date date-picker-other-month-date'>29</button>
-          <button className='date date-picker-other-month-date'>30</button>
-          <button className='date'>1</button>
-          <button className='date'>2</button>
-          <button className='date'>3</button>
-          <button className='date'>4</button>
-          <button className='date'>5</button>
-          <button className='date'>6</button>
-          <button className='date'>7</button>
-          <button className='date'>8</button>
-          <button className='date'>9</button>
-          <button className='date'>10</button>
-          <button className='date'>11</button>
-          <button className='date'>12</button>
-          <button className='date'>13</button>
-          <button className='date'>14</button>
-          <button className='date'>15</button>
-          <button className='date'>16</button>
-          <button className='date'>17</button>
-          <button className='date'>18</button>
-          <button className='date'>19</button>
-          <button className='date'>20</button>
-          <button className='date'>21</button>
-          <button className='date'>22</button>
-          <button className='date'>23</button>
-          <button className='date'>24</button>
-          <button className='date'>25</button>
-          <button className='date selected'>26</button>
-          <button className='date'>27</button>
-          <button className='date'>28</button>
-          <button className='date'>29</button>
-          <button className='date'>30</button>
-          <button className='date'>31</button>
+          {monthDates.map((day) => {
+            if (isInCurrentMonth(currentDate, day)) {
+              return (
+                <button
+                  key={day}
+                  className={
+                    isSameDay(selectedDate, day) ? 'date selected' : 'date'
+                  }
+                >
+                  {day.getDate()}
+                </button>
+              );
+            } else {
+              return (
+                <button key={day} className='date date-picker-other-month-date'>
+                  {day.getDate()}
+                </button>
+              );
+            }
+          })}
         </div>
       </div>
     </div>
