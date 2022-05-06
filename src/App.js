@@ -1,11 +1,11 @@
-import './App.css';
+import "./App.css";
 
-import LoginForm from './components/LoginForm/LoginForm';
+import ChartArea from "./components/chart/ChartArea";
 
 function App() {
   return (
-    <div className='App'>
-      <LoginForm />
+    <div className="App">
+      <ChartArea />
     </div>
   );
 }
