@@ -50,9 +50,6 @@ function Calendar() {
     setCurrentDate((prevDate) => subMonths(prevDate, 1));
   };
 
-  const isInCurrentMonth = (date1, date2) => {
-    return isSameMonth(date1, date2);
-  };
   return (
     <div className='date-picker-container'>
       <div className='date-picker'>
@@ -87,24 +84,20 @@ function Calendar() {
         </div>
         <div className='date-picker-grid-dates date-picker-grid'>
           {monthDates.map((day) => {
-            if (isInCurrentMonth(currentDate, day)) {
-              return (
-                <button
-                  key={day}
-                  className={
-                    isSameDay(selectedDate, day) ? 'date selected' : 'date'
-                  }
-                >
-                  {day.getDate()}
-                </button>
-              );
-            } else {
-              return (
-                <button key={day} className='date date-picker-other-month-date'>
-                  {day.getDate()}
-                </button>
-              );
-            }
+            return isSameMonth(currentDate, day) ? (
+              <button
+                key={day}
+                className={
+                  isSameDay(selectedDate, day) ? 'date selected' : 'date'
+                }
+              >
+                {day.getDate()}
+              </button>
+            ) : (
+              <button className='date date-picker-other-month-date'>
+                {day.getDate()}
+              </button>
+            );
           })}
         </div>
       </div>
