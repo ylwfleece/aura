@@ -12,7 +12,6 @@ import {
   isSameMonth,
   isSameDay,
 } from 'date-fns';
-import { elementAcceptingRef } from '@mui/utils';
 
 function Calendar() {
   const [currentDate, setCurrentDate] = useState(new Date());
